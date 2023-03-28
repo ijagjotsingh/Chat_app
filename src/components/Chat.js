@@ -78,8 +78,7 @@ function Chat({ room }) {
       alert(
         "Username already exists. Please try again and enter an unique username"
       );
-      // setUsername("");
-      // setNewMessage("");
+    
     } else {
       await supabase.from("messages").insert({
         message: newMessage,
@@ -90,7 +89,7 @@ function Chat({ room }) {
       if (room !== "") {
         setFlag(true);
       }
-      // setUsername(username);
+      
       setNewMessage("");
     }
   };
