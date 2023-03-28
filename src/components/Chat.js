@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import MessageBubble from "./MessageBubble";
 
-const supabaseUrl = "https://vknhxwuoqbuzcddsuzyy.supabase.co";
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZrbmh4d3VvcWJ1emNkZHN1enl5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2Nzk5MTgwMDIsImV4cCI6MTk5NTQ5NDAwMn0.DBLV_s3G2MlLgaRcu1zbws7SRdS5r9nteTFtjFURhco";
+const supabaseUrl = process.env.REACT_APP_SUPABASEURL;
+const supabaseKey = process.env.REACT_APP_SUPABASEKEY
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 function Chat({ room }) {
@@ -62,7 +61,6 @@ function Chat({ room }) {
         },
         (payload) => {
           setMessages((currentMessages) => [...currentMessages, payload.new]);
-          //   console.log(payload);
         }
       )
       .subscribe();
@@ -97,13 +95,13 @@ function Chat({ room }) {
     }
   };
 
-  console.log(room);
   return (
     <div className="flex flex-col justify-between mainChat">
       <div className="messageContainer overflow-y-auto">
         {messages?.map((msg) => (
           <MessageBubble
             messages={messages}
+            flag = {flag}
             room={room}
             currentUser={username}
             username={msg.username}
